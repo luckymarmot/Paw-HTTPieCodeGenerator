@@ -1,4 +1,4 @@
-http{{#body.has_body}} --form{{/body.has_body}} {{{request.method}}} {{{request.url}}} \
+http{{#body}} --form{{/body}} {{{request.method}}} {{{request.url}}} \
 {{#headers.has_headers}}
 {{#headers.header_list}}
 '{{{header_name}}}':'{{{header_value}}}' \

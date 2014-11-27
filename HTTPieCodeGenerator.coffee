@@ -40,7 +40,6 @@ HTTPieCodeGenerator = ->
         json_body = request.jsonBody
         if json_body
             return {
-                "has_body":true
                 "has_json_body":true
                 "json_body_object":@json_body_object json_body, 2
             }
@@ -48,7 +47,6 @@ HTTPieCodeGenerator = ->
         url_encoded_body = request.urlEncodedBody
         if url_encoded_body
             return {
-                "has_body":true
                 "has_url_encoded_body":true
                 "url_encoded_body": ({
                     "name": addslashes name
@@ -59,7 +57,6 @@ HTTPieCodeGenerator = ->
         multipart_body = request.multipartBody
         if multipart_body 
             return {
-                "has_body":true
                 "has_multipart_body":true
                 "multipart_body": ({
                     "name": addslashes name
@@ -71,13 +68,11 @@ HTTPieCodeGenerator = ->
         if raw_body
             if raw_body.length < 5000
                 return {
-                    "has_body":true
                     "has_raw_body":true
                     "raw_body": addslashes raw_body
                 }
             else
                 return {
-                    "has_body":true
                     "has_long_body":true
                 }
 
