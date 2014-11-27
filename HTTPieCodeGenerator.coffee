@@ -55,7 +55,7 @@ HTTPieCodeGenerator = ->
             }
 
         multipart_body = request.multipartBody
-        if multipart_body 
+        if multipart_body
             return {
                 "has_multipart_body":true
                 "multipart_body": ({
@@ -99,6 +99,18 @@ HTTPieCodeGenerator = ->
 
         return s
 
+    @strip_last_backslash = (string) ->
+        # Remove the last backslash on the last non-empty line
+        # We do that programatically as it's difficult to know the "last line"
+        # in Mustache templates
+
+        lines = string.split("\n")
+        for i in [(lines.length - 1)..0]
+            lines[i] = lines[i].replace(/\s*\\\s*$/, "")
+            if not lines[i].match(/^\s*$/)
+                break
+        lines.join("\n")
+
     @generate = (context) ->
         request = context.getCurrentRequest()
 
@@ -110,7 +122,8 @@ HTTPieCodeGenerator = ->
             "body": @body request
 
         template = readFile "httpie.mustache"
-        Mustache.render template, view
+        rendered_code = Mustache.render template, view
+        @strip_last_backslash rendered_code
 
     return
 
