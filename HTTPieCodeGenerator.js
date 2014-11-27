@@ -66,7 +66,7 @@
       if (json_body) {
         return {
           "has_json_body": true,
-          "json_body_object": this.json_body_object(json_body, 2)
+          "json_body_object": this.json_body_object(json_body)
         };
       }
       url_encoded_body = request.urlEncodedBody;
@@ -121,42 +121,38 @@
         }
       }
     };
-    this.json_body_object = function(object, indent) {
-      var indent_str, indent_str_children, key, s, value;
-      if (indent == null) {
-        indent = 0;
-      }
+    this.json_body_object = function(object) {
+      var key, s, sign, value;
       if (object === null) {
-        s = "None";
+        s = "null";
       } else if (typeof object === 'string') {
         s = "\"" + (addslashes(object)) + "\"";
       } else if (typeof object === 'number') {
         s = "" + object;
       } else if (typeof object === 'boolean') {
-        s = "" + (object ? "True" : "False");
+        s = "" + (object ? "true" : "false");
       } else if (typeof object === 'object') {
-        indent_str = Array(indent + 1).join('    ');
-        indent_str_children = Array(indent + 2).join('    ');
         if (object.length != null) {
-          s = "[\n" + ((function() {
+          s = "'[" + ((function() {
             var _i, _len, _results;
             _results = [];
             for (_i = 0, _len = object.length; _i < _len; _i++) {
               value = object[_i];
-              _results.push("" + indent_str_children + (this.json_body_object(value, indent + 1)));
+              _results.push("" + (this.json_body_object(value)));
             }
             return _results;
-          }).call(this)).join(',\n') + ("\n" + indent_str + "]");
+          }).call(this)).join(',') + "]'";
         } else {
-          s = "{\n" + ((function() {
-            var _results;
-            _results = [];
-            for (key in object) {
-              value = object[key];
-              _results.push("" + indent_str_children + "\"" + (addslashes(key)) + "\": " + (this.json_body_object(value, indent + 1)));
+          for (key in object) {
+            value = object[key];
+            console.log(value);
+            if (typeof value === 'string') {
+              sign = "=";
+            } else {
+              sign = ":=";
             }
-            return _results;
-          }).call(this)).join(',\n') + ("\n" + indent_str + "}");
+            s += "    " + (addslashes(key)) + sign + (this.json_body_object(value)) + "\\\n";
+          }
         }
       }
       return s;
