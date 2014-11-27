@@ -61,7 +61,7 @@
       };
     };
     this.body = function(request) {
-      var json_body, multipart_body, name, raw_body, url_encoded_body, value;
+      var has_tabs_or_new_lines, json_body, multipart_body, name, raw_body, url_encoded_body, value;
       json_body = request.jsonBody;
       if (json_body) {
         return {
@@ -108,8 +108,10 @@
       raw_body = request.body;
       if (raw_body) {
         if (raw_body.length < 5000) {
+          has_tabs_or_new_lines = null !== /\r|\n|\t/.exec(raw_body);
           return {
-            "has_raw_body": true,
+            "has_raw_body_with_tabs_or_new_lines": has_tabs_or_new_lines,
+            "has_raw_body_without_tabs_or_new_lines": !has_tabs_or_new_lines,
             "raw_body": addslashes(raw_body)
           };
         } else {
