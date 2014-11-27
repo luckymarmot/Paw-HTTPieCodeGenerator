@@ -20,7 +20,7 @@ http{{#body}} --form{{/body}} {{{request.method}}} {{{request.url}}} \
 {{/body.has_long_body}}
 {{#body.has_multipart_body}}
 {{#body.multipart_body}}
-'{{{name}}}'@'{{{value}}}'
+'{{{name}}}'='{{{value}}}' \
 {{/body.multipart_body}}
 {{/body.has_multipart_body}}
 {{#body.has_json_body}}
