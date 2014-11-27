@@ -65,6 +65,8 @@
       json_body = request.jsonBody;
       if (json_body) {
         return {
+          "has_form_encoded": false,
+          "has_json_encoded": true,
           "has_json_body": true,
           "json_body_object": this.json_body_object(json_body)
         };
@@ -72,6 +74,8 @@
       url_encoded_body = request.urlEncodedBody;
       if (url_encoded_body) {
         return {
+          "has_form_encoded": true,
+          "has_json_encoded": false,
           "has_url_encoded_body": true,
           "url_encoded_body": (function() {
             var _results;
@@ -90,6 +94,8 @@
       multipart_body = request.multipartBody;
       if (multipart_body) {
         return {
+          "has_form_encoded": true,
+          "has_json_encoded": false,
           "has_multipart_body": true,
           "multipart_body": (function() {
             var _results;
@@ -110,12 +116,16 @@
         if (raw_body.length < 5000) {
           has_tabs_or_new_lines = null !== /\r|\n|\t/.exec(raw_body);
           return {
+            "has_form_encoded": true,
+            "has_json_encoded": false,
             "has_raw_body_with_tabs_or_new_lines": has_tabs_or_new_lines,
             "has_raw_body_without_tabs_or_new_lines": !has_tabs_or_new_lines,
             "raw_body": addslashes(raw_body)
           };
         } else {
           return {
+            "has_form_encoded": true,
+            "has_json_encoded": false,
             "has_long_body": true
           };
         }
