@@ -1,28 +1,28 @@
 http{{#body}} --form{{/body}} {{{request.method}}} {{{request.url}}} \
-    {{#headers.has_headers}}
-    {{#headers.header_list}}
+{{#headers.has_headers}}
+{{#headers.header_list}}
     '{{{header_name}}}':'{{{header_value}}}' \
-    {{/headers.header_list}}
-    {{/headers.has_headers}}
-    {{#body.has_url_encoded_body}}
-    {{#body.url_encoded_body}}
+{{/headers.header_list}}
+{{/headers.has_headers}}
+{{#body.has_url_encoded_body}}
+{{#body.url_encoded_body}}
     '{{{name}}}'='{{{value}}}' \
-    {{/body.url_encoded_body}}
-    {{/body.has_url_encoded_body}}
-    {{#body.has_raw_body_with_tabs_or_new_lines}}
+{{/body.url_encoded_body}}
+{{/body.has_url_encoded_body}}
+{{#body.has_raw_body_with_tabs_or_new_lines}}
     'data'=$'{{{body.raw_body}}}' \
-    {{/body.has_raw_body_with_tabs_or_new_lines}}
-    {{#body.has_raw_body_without_tabs_or_new_lines}}
+{{/body.has_raw_body_with_tabs_or_new_lines}}
+{{#body.has_raw_body_without_tabs_or_new_lines}}
     'data'='{{{body.raw_body}}}' \
-    {{/body.has_raw_body_without_tabs_or_new_lines}}
-    {{#body.has_long_body}}
+{{/body.has_raw_body_without_tabs_or_new_lines}}
+{{#body.has_long_body}}
     'data'='set your body string' \
-    {{/body.has_long_body}}
-    {{#body.has_multipart_body}}
-    {{#body.multipart_body}}
+{{/body.has_long_body}}
+{{#body.has_multipart_body}}
+{{#body.multipart_body}}
     '{{{name}}}'='{{{value}}}' \
-    {{/body.multipart_body}}
-    {{/body.has_multipart_body}}
-    {{#body.has_json_body}}
-    {{{body.json_body_object}}}
-    {{/body.has_json_body}}
+{{/body.multipart_body}}
+{{/body.has_multipart_body}}
+{{#body.has_json_body}}
+{{{body.json_body_object}}}
+{{/body.has_json_body}}

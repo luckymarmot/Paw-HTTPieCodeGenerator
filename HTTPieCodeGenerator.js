@@ -143,6 +143,7 @@
             return _results;
           }).call(this)).join(',') + "]'";
         } else {
+          s = "";
           for (key in object) {
             value = object[key];
             sign = "" + (typeof value === 'string' ? "=" : ":=");
