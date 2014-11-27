@@ -92,9 +92,7 @@ HTTPieCodeGenerator = ->
                 s = "'[" + ("#{@json_body_object(value)}" for value in object).join(',') + "]'"
             else 
                 for key, value of object
-                    if typeof(value) == 'string'
-                        sign = "="
-                    else sign = ":="
+                    sign = "#{if typeof(value) == 'string' then "=" else ":="}"
                     s += "    #{addslashes key}#{sign}#{@json_body_object(value)} \\\n"
         return s
 

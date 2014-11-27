@@ -145,13 +145,8 @@
         } else {
           for (key in object) {
             value = object[key];
-            console.log(value);
-            if (typeof value === 'string') {
-              sign = "=";
-            } else {
-              sign = ":=";
-            }
-            s += "    " + (addslashes(key)) + sign + (this.json_body_object(value)) + "\\\n";
+            sign = "" + (typeof value === 'string' ? "=" : ":=");
+            s += "    " + (addslashes(key)) + sign + (this.json_body_object(value)) + " \\\n";
           }
         }
       }
