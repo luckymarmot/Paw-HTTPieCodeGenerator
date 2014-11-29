@@ -1,5 +1,5 @@
 {
-  "name": "Paw-HTTPPieCodeGenerator",
+  "name": "Paw-HTTPieCodeGenerator",
   "version": "0.1.0",
   "devDependencies": {
     "coffee-script": "latest",
@@ -11,6 +11,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:LuckyMarmot/Paw-HTTPPieCodeGenerator.git"
+    "url": "git@github.com:LuckyMarmot/Paw-HTTPieCodeGenerator.git"
   }
 }

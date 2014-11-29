@@ -11,9 +11,9 @@ deploy:
   provider: releases
   api_key:
     secure: SLAH3wke7cSHLT36YJ0wBVAmuoaCLjROyc9dKE4cBy0LHScuDFdzf4kW2EdWdILR2zIdRsMFYekfopm8kR4ZFloaB+F2AYSzhwaEtohU5bWMJepWCHno/M6NcOPidpHKPGsi6x+D89n/OYu+EzfxIX5cJA6NKubuqbb3OZgxOAg=
-  file: build/HTTPPieCodeGenerator.zip
+  file: build/HTTPieCodeGenerator.zip
   skip_cleanup: true
   on:
     tags: true
     all_branches: true
-    repo: LuckyMarmot/Paw-HTTPPieCodeGenerator
+    repo: LuckyMarmot/Paw-HTTPieCodeGenerator
