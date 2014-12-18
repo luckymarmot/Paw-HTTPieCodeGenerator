@@ -141,5 +141,6 @@ HTTPieCodeGenerator.identifier =
 HTTPieCodeGenerator.title =
     "HTTPie"
 HTTPieCodeGenerator.fileExtension = "sh"
+HTTPieCodeGenerator.languageHighlighter = "bash"
 
 registerCodeGenerator HTTPieCodeGenerator
