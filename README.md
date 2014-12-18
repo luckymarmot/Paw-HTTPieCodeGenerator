@@ -2,13 +2,23 @@
 
 # HTTPie Code Generator (Paw Extension)
 
-This a Paw Extension that generates [HTTPie](https://github.com/jakubroztocil/httpie) command line code.
+A [Paw Extension](http://luckymarmot.com/paw/extensions/) that generates [HTTPie](https://github.com/jakubroztocil/httpie) command line code.
 
 ## Installation
 
-* `npm install`
-* `cake build`
-* `cake install`
+```shell
+npm install
+cake build
+cake install
+```
+
+## Development
+
+During development, watch for changes:
+
+```shell
+cake watch
+```
 
 ## License
 
