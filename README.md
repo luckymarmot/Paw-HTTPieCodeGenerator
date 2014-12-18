@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/LuckyMarmot/Paw-HTTPieCodeGenerator.svg?branch=master)](https://travis-ci.org/LuckyMarmot/Paw-HTTPieCodeGenerator)
+[![Build Status](https://travis-ci.org/luckymarmot/Paw-HTTPieCodeGenerator.svg?branch=master)](https://travis-ci.org/luckymarmot/Paw-HTTPieCodeGenerator)
 
 # HTTPie Code Generator (Paw Extension)
 
@@ -18,7 +18,7 @@ Copyright © 2014 Paw Inc.
 
 ## Contributors
 
-Created by Quentin Rousseau ([@kwent](https://github.com/kwent)). See [Contributors](https://github.com/LuckyMarmot/Paw-HTTPieCodeGenerator/graphs/contributors).
+Created by Quentin Rousseau ([@kwent](https://github.com/kwent)). See [Contributors](https://github.com/luckymarmot/Paw-HTTPieCodeGenerator/graphs/contributors).
 
 ## Credits
 
