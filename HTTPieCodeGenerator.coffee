@@ -137,8 +137,9 @@ HTTPieCodeGenerator = ->
 
 
 HTTPieCodeGenerator.identifier =
-    "com.luckymarmot.PawExtensions.HTTPieCodeGenerator";
+    "com.luckymarmot.PawExtensions.HTTPieCodeGenerator"
 HTTPieCodeGenerator.title =
-    "HTTPie";
+    "HTTPie"
+HTTPieCodeGenerator.fileExtension = "sh"
 
 registerCodeGenerator HTTPieCodeGenerator
