@@ -113,6 +113,44 @@ HTTPieCodeGenerator = ->
                     sign = "#{if typeof(value) == 'string' then "=" else ":="}"
                     s += "    #{addslashes key}#{sign}#{@json_body_object(value)} \\\n"
         return s
+        
+    @nested_array_object = (array, level) ->
+      s = '['
+      for index of array
+        value = array[index]
+        indentationString = '  '.repeat(level - 1)
+        if typeof value == 'object'
+          if value.length != null
+            s += @nested_array_object(value, level)
+          else
+            s += '{\n' + @nested_hash_object(value, level) + indentationString + '}'
+        else
+          s += @json_body_object(value)
+        if index < array.length - 1
+          s += ', '
+      s += ']'
+      s
+
+    @nested_hash_object = (object, level) ->
+      s = ''
+      keys = Object.keys(object)
+      for index of keys
+        key = keys[index]
+        value = object[key]
+        indentationString = '  '.repeat(level)
+        s += indentationString
+        s += '"' + addslashes(key) + '": '
+        if typeof value == 'object'
+          if value.length != null
+            s += @nested_array_object(value, level + 1)
+          else
+            s += '{\n' + @nested_hash_object(value, level + 1) + indentationString + '}'
+        else
+          s += @json_body_object(value)
+        if index < keys.length - 1
+          s += ', '
+        s += ' \n'
+      s
 
     @strip_last_backslash = (string) ->
         # Remove the last backslash on the last non-empty line
