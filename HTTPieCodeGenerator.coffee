@@ -45,7 +45,7 @@ HTTPieCodeGenerator = ->
 
     @body = (request) ->
         json_body = request.jsonBody
-        if json_body
+        if json_body and not json_body.length
             return {
                 "has_form_encoded":false
                 "has_json_encoded":true
@@ -96,7 +96,7 @@ HTTPieCodeGenerator = ->
                 }
 
     @json_body_object = (object) ->
-        if object == null
+        if object == null or !object or typeof(object) == 'undefined'
             s = "null"
         else if typeof(object) == 'string'
             s = "\"#{addslashes object}\""
@@ -104,58 +104,21 @@ HTTPieCodeGenerator = ->
             s = "#{object}"
         else if typeof(object) == 'boolean'
             s = "#{if object then "true" else "false"}"
-        else if typeof(object) == 'object'
+        else
             if object.length?
-                s = "'[" + ("#{@json_body_object(value)}" for value in object).join(',') + "]'"
+                s = "    \"#{ addslashes(JSON.stringify(object)) }\""
             else
                 s = ""
                 for key, value of object
-                    sign = "#{if typeof(value) == 'string' then "=" else ":="}"
-                    if typeof value == 'object'
-                      s += addslashes(key) + sign
-                      if value.length != null
-                        s += @nested_array_object(value, 1)
+                    if s.length > 0
+                        s += ' \\\n'
+                    if typeof(value) == 'string'
+                        s += "    #{ addslashes(key) }=\"#{ addslashes(value) }\""
+                    else if typeof(value) == 'object' and value != null
+                        s += "    #{ addslashes(key) }:=\"#{ addslashes(JSON.stringify(value, null, '  ')) }\""
                     else
-                      s += '\'{\n' + @nested_hash_object(value, 1) + '}\''
+                        s += "    #{ addslashes(key) }:=#{ addslashes(value) }"
         return s
-        
-    @nested_array_object = (array, level) ->
-      s = '['
-      for index of array
-        value = array[index]
-        indentationString = '  '.repeat(level - 1)
-        if typeof value == 'object'
-          if value.length != null
-            s += @nested_array_object(value, level)
-          else
-            s += '{\n' + @nested_hash_object(value, level) + indentationString + '}'
-        else
-          s += @json_body_object(value)
-        if index < array.length - 1
-          s += ', '
-      s += ']'
-      s
-
-    @nested_hash_object = (object, level) ->
-      s = ''
-      keys = Object.keys(object)
-      for index of keys
-        key = keys[index]
-        value = object[key]
-        indentationString = '  '.repeat(level)
-        s += indentationString
-        s += '"' + addslashes(key) + '": '
-        if typeof value == 'object'
-          if value.length != null
-            s += @nested_array_object(value, level + 1)
-          else
-            s += '{\n' + @nested_hash_object(value, level + 1) + indentationString + '}'
-        else
-          s += @json_body_object(value)
-        if index < keys.length - 1
-          s += ', '
-        s += ' \n'
-      s
 
     @strip_last_backslash = (string) ->
         # Remove the last backslash on the last non-empty line
