@@ -111,7 +111,12 @@ HTTPieCodeGenerator = ->
                 s = ""
                 for key, value of object
                     sign = "#{if typeof(value) == 'string' then "=" else ":="}"
-                    s += "    #{addslashes key}#{sign}#{@json_body_object(value)} \\\n"
+                    if typeof value == 'object'
+                      s += addslashes(key) + sign
+                      if value.length != null
+                        s += @nested_array_object(value, 1)
+                    else
+                      s += '\'{\n' + @nested_hash_object(value, 1) + '}\''
         return s
         
     @nested_array_object = (array, level) ->
