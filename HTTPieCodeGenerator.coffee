@@ -45,7 +45,7 @@ HTTPieCodeGenerator = ->
 
     @body = (request) ->
         json_body = request.jsonBody
-        if json_body
+        if json_body and not json_body.length
             return {
                 "has_form_encoded":false
                 "has_json_encoded":true
@@ -96,7 +96,7 @@ HTTPieCodeGenerator = ->
                 }
 
     @json_body_object = (object) ->
-        if object == null
+        if object == null or !object or typeof(object) == 'undefined'
             s = "null"
         else if typeof(object) == 'string'
             s = "\"#{addslashes object}\""
@@ -104,14 +104,20 @@ HTTPieCodeGenerator = ->
             s = "#{object}"
         else if typeof(object) == 'boolean'
             s = "#{if object then "true" else "false"}"
-        else if typeof(object) == 'object'
+        else
             if object.length?
-                s = "'[" + ("#{@json_body_object(value)}" for value in object).join(',') + "]'"
+                s = "    \"#{ addslashes(JSON.stringify(object)) }\""
             else
                 s = ""
                 for key, value of object
-                    sign = "#{if typeof(value) == 'string' then "=" else ":="}"
-                    s += "    #{addslashes key}#{sign}#{@json_body_object(value)} \\\n"
+                    if s.length > 0
+                        s += ' \\\n'
+                    if typeof(value) == 'string'
+                        s += "    #{ addslashes(key) }=\"#{ addslashes(value) }\""
+                    else if typeof(value) == 'object' and value != null
+                        s += "    #{ addslashes(key) }:=\"#{ addslashes(JSON.stringify(value, null, '  ')) }\""
+                    else
+                        s += "    #{ addslashes(key) }:=#{ addslashes(value) }"
         return s
 
     @strip_last_backslash = (string) ->
