@@ -34,7 +34,7 @@ Copyright © 2014 Paw Inc.
 
 ## Contributors
 
-Created by Quentin Rousseau ([@kwent](https://github.com/kwent)). See [Contributors](https://github.com/luckymarmot/Paw-HTTPieCodeGenerator/graphs/contributors).
+Created by Quentin Rousseau ([@kwent](https://github.com/kwent)). Maintained by Jonathan Montane ([@JonathanMontane](https://github.com/JonathanMontane)). See [Contributors](https://github.com/luckymarmot/Paw-HTTPieCodeGenerator/graphs/contributors).
 
 ## Credits
 

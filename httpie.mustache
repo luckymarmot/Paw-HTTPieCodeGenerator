@@ -2,7 +2,7 @@
 # note: HTTPie will post as form url-encoded if no file is specified
 {{/body.has_multipart_body}}
 {{! ----- }}
-http{{#body.has_form_encoded}} --form{{/body.has_form_encoded}}{{#body.has_json_encoded}} --json{{/body.has_json_encoded}} {{{request.method}}} {{{request.url}}} \
+http{{#body.has_form_encoded}} --form{{/body.has_form_encoded}}{{#body.has_json_encoded}} --json{{/body.has_json_encoded}} {{{request.method}}} '{{{request.url}}}' \
 {{! ----- }}
 {{#headers.has_headers}}
 {{#headers.header_list}}
