@@ -10,6 +10,10 @@ http{{#body.has_form_encoded}} --form{{/body.has_form_encoded}}{{#body.has_json_
 {{/headers.header_list}}
 {{/headers.has_headers}}
 {{! ----- }}
+{{#basicAuth}}
+    --auth {{{basicAuth.username}}}:{{{basicAuth.password}}} \
+{{/basicAuth}}
+{{! ----- }}
 {{#body.has_url_encoded_body}}
 {{#body.url_encoded_body}}
     '{{{name}}}'='{{{value}}}' \
