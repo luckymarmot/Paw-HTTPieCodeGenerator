@@ -35,6 +35,9 @@ HTTPieCodeGenerator = ->
 
     @headers = (request) ->
         headers = request.headers
+
+        delete headers['Authorization'] if request.httpBasicAuth
+
         return {
             "has_headers": Object.keys(headers).length > 0
             "header_list": ({
@@ -140,6 +143,7 @@ HTTPieCodeGenerator = ->
             "method": request.method.toUpperCase()
             "url": @url request
             "headers": @headers request
+            "basicAuth": request.httpBasicAuth
             "body": @body request
 
         template = readFile "httpie.mustache"
